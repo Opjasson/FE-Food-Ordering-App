@@ -26,7 +26,7 @@ import { RouterLink, RouterView } from "vue-router";
                         </li>
 
                         <li class="nav-item">
-                            <RouterLink to="/about">ABOUT</RouterLink>
+                            <a href="#">LOGOUT</a>
                         </li>
                     </ul>
                     <li class="d-flex">
