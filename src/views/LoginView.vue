@@ -3,7 +3,7 @@
         class="bg-light d-flex justify-content-center align-items-center vh-100">
         <div class="card shadow p-4" style="width: 350px; border-radius: 1rem">
             <h3 class="text-center mb-3">Login</h3>
-            <form>
+            <form @submit.prevent>
                 <!-- Email -->
                 <div class="mb-3">
                     <label for="email" class="form-label">Email address</label>
@@ -12,7 +12,8 @@
                         class="form-control"
                         id="email"
                         placeholder="Enter email"
-                        required />
+                        required
+                        v-model="email" />
                 </div>
                 <!-- Password -->
                 <div class="mb-3">
@@ -22,7 +23,8 @@
                         class="form-control"
                         id="password"
                         placeholder="Enter password"
-                        required />
+                        required
+                        v-model="password" />
                 </div>
                 <!-- Remember Me -->
                 <div class="mb-3 form-check">
@@ -35,7 +37,7 @@
                     >
                 </div>
                 <!-- Submit -->
-                <button type="submit" class="btn btn-primary w-100">
+                <button @click="login" class="btn btn-primary w-100">
                     Login
                 </button>
             </form>
@@ -46,6 +48,16 @@
     </div>
 </template>
 
-<script setup></script>
+<script setup>
+import { ref } from "vue";
+
+const email = ref("");
+const password = ref("");
+
+function login() {
+    console.log(email.value);
+    console.log(password.value);
+}
+</script>
 
 <style lang="scss" scoped></style>

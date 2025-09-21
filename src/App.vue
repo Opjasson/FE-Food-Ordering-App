@@ -3,7 +3,7 @@ import { RouterLink, RouterView } from "vue-router";
 </script>
 
 <template>
-    <header>
+    <header v-if="$route.name != 'login'">
         <nav class="navbar navbar-expand-lg bg-body-tertiary">
             <div class="container-fluid">
                 <a class="navbar-brand" href="#">JssN Cafe</a>
