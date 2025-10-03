@@ -70,6 +70,7 @@ async function login() {
         localStorage.setItem("email", response.data.data.email);
         localStorage.setItem("name", response.data.data.name);
         localStorage.setItem("token", response.data.data.token);
+        localStorage.setItem("roleId", response.data.data.role_id);
         router.push({ name: "home" });
     } catch (error) {
         console.log(error);

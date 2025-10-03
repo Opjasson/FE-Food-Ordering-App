@@ -7,9 +7,10 @@ import { onMounted } from "vue";
 
 const userName = localStorage.getItem("name");
 onMounted(() => {
-    if (userName == null) {
+    if (userName == null || !userName || userName == "") {
         router.push("login");
     }
 });
+
 </script>
 <style></style>

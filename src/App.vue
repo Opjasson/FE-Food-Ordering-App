@@ -1,8 +1,29 @@
 <script setup>
 import { RouterLink, RouterView } from "vue-router";
+import router from "./router";
+import axios from "axios";
 
-const userName = localStorage.getItem('name')
+const userName = localStorage.getItem("name");
 
+const logout = async () => {
+    try {
+        await axios.get(
+            "http://127.0.0.1:8000/api/auth/logout",
+            {
+                headers: {
+                    Authorization: `Bearer ${localStorage.getItem("token")}`,
+                },
+            }
+        );
+        localStorage.removeItem("email");
+        localStorage.removeItem("name");
+        localStorage.removeItem("token");
+        localStorage.removeItem("roleId");
+        router.push({ name: "login" });
+    } catch (error) {
+        console.log(error);
+    }
+};
 </script>
 
 <template>
@@ -29,7 +50,9 @@ const userName = localStorage.getItem('name')
                         </li>
 
                         <li class="nav-item">
-                            <a href="#">LOGOUT</a>
+                            <a style="cursor: pointer;" class="hoverLogout" @click="logout()"
+                                >LOGOUT</a
+                            >
                         </li>
                     </ul>
                     <li class="d-flex">
@@ -49,4 +72,8 @@ const userName = localStorage.getItem('name')
     <RouterView />
 </template>
 
-<style scoped></style>
+<style scoped>
+    .hoverLogout:hover {
+        color: red;
+    }
+</style>
