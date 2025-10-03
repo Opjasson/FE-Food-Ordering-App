@@ -41,27 +41,39 @@
 </template>
 
 <script setup>
+import router from "@/router";
 import axios from "axios";
-import { ref } from "vue";
+import { ref, onMounted } from "vue";
 
 const formData = ref({
-    email : "",
-    password : ""
+    email: "",
+    password: "",
 });
 
-const msgErr = ref(null)
+const msgErr = ref(null);
 
-
-
+const userName = localStorage.getItem("name");
+onMounted(() => {
+    if (userName != null) {
+        router.push("home");
+    }
+});
 
 async function login() {
-    msgErr.value = null
+    msgErr.value = null;
     try {
-        const response = await axios.post("http://127.0.0.1:8000/api/auth/login", formData.value);
-        console.log(response.data);
+        const response = await axios.post(
+            "http://127.0.0.1:8000/api/auth/login",
+            formData.value
+        );
+        console.log(response.data.data);
+        localStorage.setItem("email", response.data.data.email);
+        localStorage.setItem("name", response.data.data.name);
+        localStorage.setItem("token", response.data.data.token);
+        router.push({ name: "home" });
     } catch (error) {
         console.log(error);
-        msgErr.value = error.response.data.message
+        msgErr.value = error.response.data.message;
     }
 }
 </script>

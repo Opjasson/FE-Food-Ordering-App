@@ -1,6 +1,7 @@
 <script setup>
 import { RouterLink, RouterView } from "vue-router";
 
+const userName = localStorage.getItem('name')
 
 </script>
 
@@ -32,7 +33,7 @@ import { RouterLink, RouterView } from "vue-router";
                         </li>
                     </ul>
                     <li class="d-flex">
-                        <span>Hi, manager</span>
+                        <span>Hi, {{ userName }}</span>
                     </li>
                 </div>
             </div>
