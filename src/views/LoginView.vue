@@ -6,6 +6,7 @@
             <form @submit.prevent>
                 <!-- Email -->
                 <div class="mb-3">
+                    <p></p>
                     <label for="email" class="form-label">Email address</label>
                     <input
                         type="email"
@@ -13,7 +14,7 @@
                         id="email"
                         placeholder="Enter email"
                         required
-                        v-model="email" />
+                        v-model="formData.email" />
                 </div>
                 <!-- Password -->
                 <div class="mb-3">
@@ -24,18 +25,9 @@
                         id="password"
                         placeholder="Enter password"
                         required
-                        v-model="password" />
+                        v-model="formData.password" />
                 </div>
-                <!-- Remember Me -->
-                <div class="mb-3 form-check">
-                    <input
-                        type="checkbox"
-                        class="form-check-input"
-                        id="rememberMe" />
-                    <label class="form-check-label" for="rememberMe"
-                        >Remember me</label
-                    >
-                </div>
+                <p class="text-danger">{{ msgErr }}</p>
                 <!-- Submit -->
                 <button @click="login" class="btn btn-primary w-100">
                     Login
@@ -49,14 +41,28 @@
 </template>
 
 <script setup>
+import axios from "axios";
 import { ref } from "vue";
 
-const email = ref("");
-const password = ref("");
+const formData = ref({
+    email : "",
+    password : ""
+});
 
-function login() {
-    console.log(email.value);
-    console.log(password.value);
+const msgErr = ref(null)
+
+
+
+
+async function login() {
+    msgErr.value = null
+    try {
+        const response = await axios.post("http://127.0.0.1:8000/api/auth/login", formData.value);
+        console.log(response.data);
+    } catch (error) {
+        console.log(error);
+        msgErr.value = error.response.data.message
+    }
 }
 </script>
 
