@@ -1,9 +1,11 @@
 <template>
-    <div></div>
+    <Navbar :name="userName" />
+    <h1>Hallo</h1>
 </template>
 <script setup>
 import router from "@/router";
 import { onMounted } from "vue";
+import Navbar from "@/components/Navbar.vue";
 
 const userName = localStorage.getItem("name");
 onMounted(() => {
@@ -11,6 +13,5 @@ onMounted(() => {
         router.push("login");
     }
 });
-
 </script>
 <style></style>
